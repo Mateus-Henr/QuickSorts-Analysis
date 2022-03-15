@@ -1,3 +1,0 @@
-C:/Users/Mateus/Desktop/Study/UniversityProjects/TP3/cmake-build-debug/CMakeFiles/TP3.dir
-C:/Users/Mateus/Desktop/Study/UniversityProjects/TP3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Mateus/Desktop/Study/UniversityProjects/TP3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
