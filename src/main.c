@@ -16,8 +16,11 @@
 #define CINCO 5
 #define DEZ 10
 #define CEM 100
+#define DECIMAL 10
+#define DELIMITADORES "<>"
 #define CAMINHO_ARQUIVO "..//arquivos//"
 #define MINIMO_ARQ_VALIDO 4
+#define NULL_TERMINATOR 1
 #define INICIO_ARG "quicksort"
 #define ARGS_ESPERADO "\nErro: %d argumentos esperados.\n"
 #define ERRO_ARQUIVO_SAIDA "\nErro: Não foi possível gerar o arquivo de saída.\n"
@@ -50,25 +53,32 @@ int main(int argc, char *argv[])
 
     char *string = strstr(argv[UM], INICIO_ARG);
 
-    if (!string)
+    if (!string || !strtok(string, DELIMITADORES))
     {
         printf(ERRO_FORMATO);
         return INVALIDO;
     }
 
-    string += strlen(INICIO_ARG);
+    char *seedString = strtok(NULL, DELIMITADORES);
 
-    unsigned int tamanhoString = strlen(string);
-    int loopAtual = ZERO;
-    char seedString[CHAR_MAX];
-
-    while (isdigit((int) *string) && loopAtual < tamanhoString)
+    if (!seedString)
     {
-        seedString[loopAtual++] = (*string++);
+        printf(ERRO_FORMATO);
+        return INVALIDO;
     }
 
-    // Checando se a semente e o nome do pArquivo são válidos.
-    if (loopAtual == ZERO || loopAtual >= tamanhoString || strlen(string) <= MINIMO_ARQ_VALIDO)
+    for (int i = ZERO; i < strlen(seedString); i++)
+    {
+        if (!isdigit((int) seedString[i]))
+        {
+            printf(ERRO_FORMATO);
+            return INVALIDO;
+        }
+    }
+
+    char *nomeArquivo = strtok(NULL, DELIMITADORES);
+
+    if (!nomeArquivo || strlen(nomeArquivo) < MINIMO_ARQ_VALIDO)
     {
         printf(ERRO_FORMATO);
         return INVALIDO;
@@ -78,12 +88,12 @@ int main(int argc, char *argv[])
 
     // Declarando variáveis.
     unsigned int seed = ZERO;
-    char arquivo[CHAR_MAX];
+    char arquivo[strlen(CAMINHO_ARQUIVO) + strlen(nomeArquivo) + NULL_TERMINATOR];
 
     // Atribuindo caminho do arquivo.
     strcpy(arquivo, CAMINHO_ARQUIVO);
     // Atribuindo nome do pArquivo.
-    strcat(arquivo, string);
+    strcat(arquivo, nomeArquivo);
     // Atribuindo seed.
     sscanf(seedString, "%i", &seed);
 
@@ -121,42 +131,42 @@ int main(int argc, char *argv[])
         quickSortRecursivo(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
         valores.tempo = calculaTempo(clock);
         escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortMediana(arrRandomNum, TRES, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortMediana(arrRandomNum, CINCO, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortInsercao(arrRandomNum, DEZ, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortInsercao(arrRandomNum, CEM, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortEmpilha(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
-
-        clock = inicializaClock();
-        inicializaTupla(&valores);
-        quickSortIterativo(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
-        valores.tempo = calculaTempo(clock);
-        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortMediana(arrRandomNum, TRES, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortMediana(arrRandomNum, CINCO, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortInsercao(arrRandomNum, DEZ, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortInsercao(arrRandomNum, CEM, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortEmpilha(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
+//
+//        clock = inicializaClock();
+//        inicializaTupla(&valores);
+//        quickSortIterativo(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
+//        valores.tempo = calculaTempo(clock);
+//        escreveNoArquivo(pArquivo, &valores);
     }
 
 

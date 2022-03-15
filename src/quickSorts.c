@@ -1,6 +1,7 @@
 #include "quickSorts.h"
 #include <stdlib.h>
 #include <math.h>
+
 #define ZERO 0
 #define UM 1
 #define DOIS 2
@@ -67,48 +68,50 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
 }
 
 // calcula a mediana aleatoria
-int Mediana(int quantidade,int *arr,int final){
-    int *random , comparador, mediana, true,chave, mid;
-    true=1;
+int Mediana(int quantidade, int *arr, int final)
+{
+    int *random, comparador, mediana, true, chave, mid;
+    true = 1;
 
     //acha randons que não se repetem e coloca em um arr
-    while(true)
-    { int l=0,contador=0;
+    while (true)
+    {
+        int l = 0, contador = 0;
         for (int i = 0; i < quantidade; ++i)
         {
-            random[i]= rand() %final;
+            random[i] = rand() % final;
         }
         for (int j = 0; j < quantidade; ++j)
         {
-            for (int k = 0; k < quantidade-1; ++k)
+            for (int k = 0; k < quantidade - 1; ++k)
             {
-                if(random[j]==random[k] && j!=k)
+                if (random[j] == random[k] && j != k)
                 {
                     contador++;
                 }
             }
         }
-        if(contador<=0)
+        if (contador <= 0)
         {
-            true=0;
+            true = 0;
         }
     }
 
     //organiza a lista com insertion
     for (int i = 0; i < quantidade; ++i)
     {
-        int j =0;
-        chave= arr[random[i]];
-        j = j-1;
-        while (j>=0 && arr[random[j]]> chave)
+        int j = 0;
+        chave = arr[random[i]];
+        j = j - 1;
+        while (j >= 0 && arr[random[j]] > chave)
         {
-            arr[random[j+1]]= arr[random[j]];
-            j= j-1;
+            arr[random[j + 1]] = arr[random[j]];
+            j = j - 1;
         }
-        arr[random[j+1]]=chave;
+        arr[random[j + 1]] = chave;
     }
     // calcula a mediana
-    mid =floor(quantidade)-1;
+    mid = floor(quantidade) - 1;
     mediana = arr[random[mid]];
     return mediana;
 }
