@@ -100,10 +100,10 @@ int main(int argc, char *argv[])
     // Definindo a sequência aleatória.
     srand(seed);
 
-    // Criando pArquivo de saída.
+    // Criando ponteiro para arquivo de saída.
     FILE *pArquivo = fopen(arquivo, "a+");
 
-    // Checando se pArquivo de saída é válido.
+    // Checando se o ponteiro para o arquivo de saída é válido.
     if (!pArquivo)
     {
         printf(ERRO_ARQUIVO_SAIDA);
@@ -124,51 +124,60 @@ int main(int argc, char *argv[])
             arrRandomNum[j] = rand();
         }
 
+        // Criando uma variável da estrutura tupla para juntar valores de análise.
         Tupla valores;
 
         double clock = inicializaClock();
         inicializaTupla(&valores);
         quickSortRecursivo(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
         valores.tempo = calculaTempo(clock);
+        fprintf(pArquivo, "QuickSort Recursivo - %d elementos\n", tamanhos[i]);
         escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortMediana(arrRandomNum, TRES, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort mediana (k = 3) - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortMediana(arrRandomNum, CINCO, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort Mediana (k = 5) - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortInsercao(arrRandomNum, DEZ, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort Inserção (m = 10) - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortInsercao(arrRandomNum, CEM, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort Inserção (m = 100) - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortEmpilha(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort Empilha Inteligente - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
 //
 //        clock = inicializaClock();
 //        inicializaTupla(&valores);
 //        quickSortIterativo(arrRandomNum, ZERO, tamanhos[i] - UM, &valores);
 //        valores.tempo = calculaTempo(clock);
+//        fprintf(pArquivo, "\nQuickSort Iterativo - %d elementos\n", tamanhos[i]);
 //        escreveNoArquivo(pArquivo, &valores);
     }
 
+    printf("FIM");
 
     // Fechando arquivo.
     fclose(pArquivo);
