@@ -7,6 +7,13 @@
 #define DOIS 2
 
 
+// Protótipos de funções.
+
+void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores);
+
+void troca(int *a, int *b);
+
+
 /*
  * Inicializa Tupla estrutura.
  *
@@ -17,20 +24,6 @@ void inicializaTupla(Tupla *valores)
     valores->tempo = ZERO;
     valores->qtdComparacoes = ZERO;
     valores->qtdMovimentacoes = ZERO;
-}
-
-
-/*
- * Troca os elementos de posição na memória.
- *
- * @param    a    ponteiro para valor.
- * @param    b    ponteiro para valor.
- */
-void troca(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
 }
 
 
@@ -197,3 +190,16 @@ void particaoMediana(int *arr, int inicio, int final, int *i, int *j, Tupla *val
     } while (*i <= *j);
 }
 
+
+/*
+ * Troca os elementos de posição na memória.
+ *
+ * @param    a    ponteiro para valor.
+ * @param    b    ponteiro para valor.
+ */
+void troca(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}

@@ -15,7 +15,6 @@
 #define CINCO 5
 #define DEZ 10
 #define CEM 100
-#define DECIMAL 10
 #define DELIMITADORES "<>"
 #define CAMINHO_ARQUIVO "..//arquivos//"
 #define MINIMO_ARQ_VALIDO 4
