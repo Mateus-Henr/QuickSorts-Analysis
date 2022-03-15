@@ -6,6 +6,7 @@
 #define UM 1
 #define DOIS 2
 
+
 /*
  * Inicializa Tupla estrutura.
  *
@@ -19,7 +20,7 @@ void inicializaTupla(Tupla *valores)
 }
 
 
-void particao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
+void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
 {
     *i = inicio;
     *j = final;
@@ -55,7 +56,7 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
 {
     int i, j;
 
-    particao(arr, inicio, final, &i, &j, valores);
+    criaParticao(arr, inicio, final, &i, &j, valores);
 
     if (inicio < j)
     {
@@ -66,6 +67,7 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
         quickSortRecursivo(arr, i, final, valores);
     }
 }
+
 
 // calcula a mediana aleatoria
 int Mediana(int quantidade, int *arr, int final)
@@ -116,11 +118,12 @@ int Mediana(int quantidade, int *arr, int final)
     return mediana;
 }
 
+
 void quickSortMediana(int *arr, int k, int inicio, int final, Tupla *valores)
 {
     int i, j;
 
-    particao(arr, inicio, final, &i, &j, valores);
+    criaParticao(arr, inicio, final, &i, &j, valores);
 
     if (inicio < j)
     {
@@ -131,6 +134,7 @@ void quickSortMediana(int *arr, int k, int inicio, int final, Tupla *valores)
         quickSortMediana(arr, k, i, final, valores);
     }
 }
+
 
 void particaoMediana(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
 {
