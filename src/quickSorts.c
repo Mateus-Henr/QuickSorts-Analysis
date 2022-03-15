@@ -20,6 +20,30 @@ void inicializaTupla(Tupla *valores)
 }
 
 
+/*
+ * Troca os elementos de posição na memória.
+ *
+ * @param    a    ponteiro para valor.
+ * @param    b    ponteiro para valor.
+ */
+void troca(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
+/*
+ * Cria partição para quickSort algoritmo.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    incio      inicio do array.
+ * @param    final      inicio do array.
+ * @param    i          ponteiro para cursor.
+ * @param    j          ponteiro para cursor.
+ * @param    valores    conjunto de valores para serem calculados.
+ */
 void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
 {
     *i = inicio;
@@ -41,9 +65,7 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
         valores->qtdComparacoes++;
         if (*i <= *j)
         {
-            int aux = arr[*i];
-            arr[*i] = arr[*j];
-            arr[*j] = aux;
+            troca(arr + *i, arr + *j);
             (*i)++;
             (*j)--;
             valores->qtdMovimentacoes++;
@@ -52,6 +74,14 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
 }
 
 
+/*
+ * Organiza array no estilo quickSort.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    incio      inicio do array.
+ * @param    final      inicio do array.
+ * @param    valores    conjunto de valores para serem calculados.
+ */
 void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
 {
     int i, j;

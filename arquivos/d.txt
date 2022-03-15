@@ -3,10 +3,10 @@ QuickSort Recursivo - 1000 elementos
 QuickSort Recursivo - 5000 elementos
 0.002000 17096 15716
 QuickSort Recursivo - 10000 elementos
-0.004000 36295 33563
+0.001000 36295 33563
 QuickSort Recursivo - 50000 elementos
-0.022000 213478 202945
+0.012000 213478 202945
 QuickSort Recursivo - 100000 elementos
 0.025000 456977 440085
 QuickSort Recursivo - 500000 elementos
-0.112000 2686354 2649451
+0.275000 2686354 2649451
