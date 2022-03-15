@@ -37,6 +37,8 @@ void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *,
 
 void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string);
 
+void geraNumerosAleatorios(int *arr, int tamanho);
+
 
 /*
  * A função principal. Tem como função a leitura de informações de um arquivo e manipulação dos dados.
@@ -115,17 +117,14 @@ int main(int argc, char *argv[])
 
 
     // Criando array com os tamanhos para teste.
-    int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 500000};
+    int tamanhos[] = {1000, 5000, 10000};
 
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
     {
         int arrRandomNum[tamanhos[i]];
 
         // Gerando números aleatórios.
-        for (int j = ZERO; j < tamanhos[i]; j++)
-        {
-            arrRandomNum[j] = rand();
-        }
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
         // Criando uma variável da estrutura tupla para juntar valores de análise.
         Tupla valores;
@@ -136,8 +135,10 @@ int main(int argc, char *argv[])
                        quickSortRecursivo,
                        arrRandomNum,
                        tamanhos[i],
-                       "QuickSort Recursivo - %d elementos\n");
+                       "\nQuickSort Recursivo - %d elementos\n");
 
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+//
 //        // QuickSort Mediana (k = 3)
 //        quickSortsComK(pArquivo,
 //                       &valores,
@@ -146,6 +147,8 @@ int main(int argc, char *argv[])
 //                       TRES,
 //                       tamanhos[i],
 //                       "\nQuickSort Mediana (k = 3) - %d elementos\n");
+//
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
 //        // QuickSort Mediana (k = 5)
 //        quickSortsComK(pArquivo,
@@ -156,6 +159,8 @@ int main(int argc, char *argv[])
 //                       tamanhos[i],
 //                       "\nQuickSort Mediana (k = 5) - %d elementos\n");
 //
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+//
 //        // QuickSort Inserção (m = 10)
 //        quickSortsComK(pArquivo,
 //                       &valores,
@@ -164,6 +169,8 @@ int main(int argc, char *argv[])
 //                       DEZ,
 //                       tamanhos[i],
 //                       "\nQuickSort Inserção (m = 10) - %d elementos\n");
+//
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
 //        // QuickSort Inserção (m = 100)
 //        quickSortsComK(pArquivo,
@@ -174,6 +181,8 @@ int main(int argc, char *argv[])
 //                       tamanhos[i],
 //                       "\nQuickSort Inserção (m = 100) - %d elementos\n");
 //
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+//
 //        // QuickSort Empilha Inteligente
 //        quickSortsSemK(pArquivo,
 //                       &valores,
@@ -182,13 +191,17 @@ int main(int argc, char *argv[])
 //                       tamanhos[i],
 //                       "\nQuickSort Empilha Inteligente - %d elementos\n");
 //
-//        // QuickSort Iterativo
-//        quickSortsSemK(pArquivo,
-//                       &valores,
-//                       quickSortIterativo,
-//                       arrRandomNum,
-//                       tamanhos[i],
-//                       "\nQuickSort Iterativo - %d elementos\n");
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+//
+        // QuickSort Iterativo
+        quickSortsSemK(pArquivo,
+                       &valores,
+                       quickSortIterativo,
+                       arrRandomNum,
+                       tamanhos[i],
+                       "\nQuickSort Iterativo - %d elementos\n");
+
+        printf("HEY");
     }
 
     printf("FIM");
@@ -280,4 +293,19 @@ double inicializaClock(void)
 double calculaTempo(double tempoInicial)
 {
     return (double) (clock() - tempoInicial) / CLOCKS_PER_SEC;
+}
+
+
+/*
+ * Gera números aleatórios no array especificado.
+ *
+ * @param    arr         ponteiro para array com números aleatórios.
+ * @param    tamanho     tamanho do array.
+ */
+void geraNumerosAleatorios(int *arr, int tamanho)
+{
+    for (int j = ZERO; j < tamanho; j++)
+    {
+        arr[j] = rand();
+    }
 }

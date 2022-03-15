@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define MENOS_UM (-1)
 #define ZERO 0
 #define UM 1
 #define DOIS 2
@@ -35,6 +36,7 @@ void inicializaTupla(Tupla *valores)
  * @param    final      inicio do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
+ * @param    k          constante para algoritmos específicos. Caso não possua constante coloque 0.
  * @param    valores    conjunto de valores para serem calculados.
  */
 void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
@@ -68,7 +70,7 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
 
 
 /*
- * Organiza array no estilo quickSort.
+ * Organiza array no estilo quickSort recursivo.
  *
  * @param    arr        ponteiro para array.
  * @param    incio      inicio do array.
@@ -188,6 +190,45 @@ void particaoMediana(int *arr, int inicio, int final, int *i, int *j, Tupla *val
             valores->qtdMovimentacoes++;
         }
     } while (*i <= *j);
+}
+
+
+/*
+ * Organiza array no estilo quickSort iterativo.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    incio      inicio do array.
+ * @param    final      inicio do array.
+ * @param    valores    conjunto de valores para serem calculados.
+ */
+void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
+{
+    int stack[final - inicio + UM];
+    int topo = MENOS_UM;
+
+    stack[++topo] = inicio;
+    stack[++topo] = final;
+
+    while (topo >= ZERO)
+    {
+        final = stack[topo--];
+        inicio = stack[topo--];
+
+        int i, j;
+
+        criaParticao(arr, inicio, final, &i, &j, valores);
+
+        if (inicio < j)
+        {
+            stack[++topo] = inicio;
+            stack[++topo] = j;
+        }
+        if (i < final)
+        {
+            stack[++topo] = i;
+            stack[++topo] = final;
+        }
+    }
 }
 
 
