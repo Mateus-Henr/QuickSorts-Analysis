@@ -116,7 +116,7 @@ void particaoMediana(int *arr, int inicio, int final, int *i, int *j, Tupla *val
 }
 
 int Mediana(int quantidade,int *arr,int final){
-    int *random, comparador, mediana, true,chave;
+    int *random, comparador, mediana, true,chav, mise;
     true=1;
     while(true)
     { int l=0,contador=0;
@@ -142,9 +142,11 @@ int Mediana(int quantidade,int *arr,int final){
         chave= random[i];
         j = j-1;
         while (j>=0 && random[j]> chave){
-            random[j+1]= random[j]
-                    j=
+            random[j+1]= random[j];
+            j= j-1;
         }
+        random[j+1]=chave;
     }
+    mediana = random[mid];
     return mediana;
 }
