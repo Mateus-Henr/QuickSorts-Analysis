@@ -1,4 +1,4 @@
-# Vehicle Routing Problem
+# QuickSorts Analysis
 > Practical Work 03 – QuickSorts Analysis<br/>
 This work consists of analyzing the performance of different sorting algorithms in different scenarios, described below. This analysis will consist of comparing the algorithms considering three performance metrics: number of key comparisons, the number of copies of records made, and the total time taken for sorting.
 

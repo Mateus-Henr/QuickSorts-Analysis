@@ -1,5 +1,6 @@
 #include "quickSorts.h"
 #include <stdlib.h>
+#include <math.h>
 #define ZERO 0
 #define UM 1
 #define DOIS 2
@@ -147,7 +148,7 @@ int Mediana(int quantidade,int *arr,int final){
         }
         random[j+1]=chave;
     }
-    mid = quantidade/2;
+    mid =floor(quantidade);
     mediana = random[mid];
     return mediana;
 }
