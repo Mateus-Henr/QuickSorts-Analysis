@@ -33,9 +33,9 @@ double calculaTempo(double tempoInicial);
 
 void escreveNoArquivo(FILE *pArquivo, Tupla *valores, int tamanho, char *string);
 
-void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *, int, int, Tupla *), int *arr, int tamanho, char *string);
+void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, Tupla *), int *arr, int tamanho, char *string);
 
-void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string);
+void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string);
 
 void geraNumerosAleatorios(int *arr, int tamanho);
 
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 
 
     // Criando array com os tamanhos para teste.
-    int tamanhos[] = {1000, 5000, 10000};
+    int tamanhos[] = {1000, 5000, 10000, 50000, 100000};
 
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
     {
@@ -129,79 +129,77 @@ int main(int argc, char *argv[])
         // Criando uma variável da estrutura tupla para juntar valores de análise.
         Tupla valores;
 
-        // QuickSort Recursivo
+        // Quick Sort Recursivo
         quickSortsSemK(pArquivo,
                        &valores,
                        quickSortRecursivo,
                        arrRandomNum,
                        tamanhos[i],
-                       "\nQuickSort Recursivo - %d elementos\n");
+                       "\nQuick Sort Recursivo - %d elementos\n");
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
-//        // QuickSort Mediana (k = 3)
+//        // Quick Sort Mediana (k = 3)
 //        quickSortsComK(pArquivo,
 //                       &valores,
 //                       quickSortMediana,
 //                       arrRandomNum,
 //                       TRES,
 //                       tamanhos[i],
-//                       "\nQuickSort Mediana (k = 3) - %d elementos\n");
+//                       "\nQuick Sort Mediana (k = 3) - %d elementos\n");
 //
 //        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
-//        // QuickSort Mediana (k = 5)
+//        // Quick Sort Mediana (k = 5)
 //        quickSortsComK(pArquivo,
 //                       &valores,
 //                       quickSortMediana,
 //                       arrRandomNum,
 //                       CINCO,
 //                       tamanhos[i],
-//                       "\nQuickSort Mediana (k = 5) - %d elementos\n");
+//                       "\nQuick Sort Mediana (k = 5) - %d elementos\n");
 //
 //        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
-//
-//        // QuickSort Inserção (m = 10)
-//        quickSortsComK(pArquivo,
-//                       &valores,
-//                       quickSortMediana,
-//                       arrRandomNum,
-//                       DEZ,
-//                       tamanhos[i],
-//                       "\nQuickSort Inserção (m = 10) - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
-//
-//        // QuickSort Inserção (m = 100)
-//        quickSortsComK(pArquivo,
-//                       &valores,
-//                       quickSortMediana,
-//                       arrRandomNum,
-//                       CEM,
-//                       tamanhos[i],
-//                       "\nQuickSort Inserção (m = 100) - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
-//
-//        // QuickSort Empilha Inteligente
-//        quickSortsSemK(pArquivo,
-//                       &valores,
-//                       quickSortEmpilha,
-//                       arrRandomNum,
-//                       tamanhos[i],
-//                       "\nQuickSort Empilha Inteligente - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
-//
-        // QuickSort Iterativo
+
+        // Quick Sort Inserção (m = 10)
+        quickSortsComK(pArquivo,
+                       &valores,
+                       quickSortInsercao,
+                       arrRandomNum,
+                       DEZ,
+                       tamanhos[i],
+                       "\nQuick Sort Inserção (m = 10) - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+
+        // Quick Sort Inserção (m = 100)
+        quickSortsComK(pArquivo,
+                       &valores,
+                       quickSortInsercao,
+                       arrRandomNum,
+                       CEM,
+                       tamanhos[i],
+                       "\nQuick Sort Inserção (m = 100) - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+
+        // Quick Sort Empilha Inteligente
+        quickSortsSemK(pArquivo,
+                       &valores,
+                       quickSortEmpilha,
+                       arrRandomNum,
+                       tamanhos[i],
+                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+
+        // Quick Sort Iterativo
         quickSortsSemK(pArquivo,
                        &valores,
                        quickSortIterativo,
                        arrRandomNum,
                        tamanhos[i],
-                       "\nQuickSort Iterativo - %d elementos\n");
-
-        printf("HEY");
+                       "\nQuick Sort Iterativo - %d elementos\n");
     }
 
     printf("FIM");
@@ -215,21 +213,21 @@ int main(int argc, char *argv[])
 
 
 /*
- * Executa função quickSort (sem constante k) passada como parâmetro e salva detalhes.
+ * Executa função quick sort (sem constante k) passada como parâmetro e salva detalhes.
  *
  * @param    pArquivo           ponteiro para o arquivo.
  * @param    valores            conjunto de valores para serem escritos no arquivo.
- * @param    quickSortType      ponteiro para função quickSort para ser executada.
+ * @param    quickSortTipo      ponteiro para função quick sort para ser executada.
  * @param    arr                ponteiro para array com números aleatórios.
  * @param    tamanho            tamanho do array.
  * @param    string             contém informações do algoritmo.
  */
-void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *, int, int, Tupla *), int *arr, int tamanho, char *string)
+void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, Tupla *), int *arr, int tamanho, char *string)
 {
     double clock = inicializaClock();
     inicializaTupla(valores);
 
-    (*quickSortType)(arr, ZERO, tamanho - UM, valores);
+    (*quickSortTipo)(arr, ZERO, tamanho - UM, valores);
     valores->tempo = calculaTempo(clock);
 
     escreveNoArquivo(pArquivo, valores, tamanho, string);
@@ -237,22 +235,22 @@ void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *,
 
 
 /*
- * Executa função quickSort (com constante k) passada como parâmetro e salva detalhes.
+ * Executa função quick sort (com constante k) passada como parâmetro e salva detalhes.
  *
  * @param    pArquivo           ponteiro para o arquivo.
  * @param    valores            conjunto de valores para serem escritos no arquivo.
- * @param    quickSortType      ponteiro para função quickSort para ser executada.
+ * @param    quickSortTipo      ponteiro para função quick sort para ser executada.
  * @param    arr                ponteiro para array com números aleatórios.
- * @param    k                  constante para quickSort algoritmo.
+ * @param    k                  constante para quick sort algoritmo.
  * @param    tamanho            tamanho do array.
  * @param    string             contém informações do algoritmo.
  */
-void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortType)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string)
+void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string)
 {
     double clock = inicializaClock();
     inicializaTupla(valores);
 
-    (*quickSortType)(arr, k, ZERO, tamanho - UM, valores);
+    (*quickSortTipo)(arr, k, ZERO, tamanho - UM, valores);
     valores->tempo = calculaTempo(clock);
 
     escreveNoArquivo(pArquivo, valores, tamanho, string);

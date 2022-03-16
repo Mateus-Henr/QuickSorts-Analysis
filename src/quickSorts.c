@@ -12,6 +12,8 @@
 
 void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores);
 
+void insercaoSort(int *arr, int inicio, int final);
+
 void troca(int *a, int *b);
 
 
@@ -29,7 +31,7 @@ void inicializaTupla(Tupla *valores)
 
 
 /*
- * Cria partição para quickSort algoritmo.
+ * Cria partição para quick sort algoritmo.
  *
  * @param    arr        ponteiro para array.
  * @param    incio      inicio do array.
@@ -70,7 +72,7 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
 
 
 /*
- * Organiza array no estilo quickSort recursivo.
+ * Organiza array no estilo quick sort recursivo.
  *
  * @param    arr        ponteiro para array.
  * @param    incio      inicio do array.
@@ -194,10 +196,70 @@ void particaoMediana(int *arr, int inicio, int final, int *i, int *j, Tupla *val
 
 
 /*
- * Organiza array no estilo quickSort iterativo.
+ * Organiza array no estilo quick sort inserção.
  *
  * @param    arr        ponteiro para array.
- * @param    incio      inicio do array.
+ * @param    inicio     inicio do array.
+ * @param    k          constante para quick sort algoritmo.
+ * @param    final      inicio do array.
+ * @param    valores    conjunto de valores para serem calculados.
+ */
+void quickSortInsercao(int *arr, int k, int inicio, int final, Tupla *valores)
+{
+    if ((final - inicio) <= k)
+    {
+        insercaoSort(arr, inicio, final);
+
+        return;
+    }
+    else
+    {
+        int i, j;
+
+        criaParticao(arr, inicio, final, &i, &j, valores);
+
+        if (inicio < j)
+        {
+            quickSortInsercao(arr, k, inicio, j, valores);
+        }
+        if (i < final)
+        {
+            quickSortInsercao(arr, k, i, final, valores);
+        }
+    }
+}
+
+
+/*
+ * Organiza array no estilo quick sort empilha inteligente.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    inicio     inicio do array.
+ * @param    final      inicio do array.
+ * @param    valores    conjunto de valores para serem calculados.
+ */
+void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
+{
+    int i, j;
+
+    criaParticao(arr, inicio, final, &i, &j, valores);
+
+    if ((j - inicio) < (final - i))
+    {
+        quickSortEmpilha(arr, inicio, j, valores);
+    }
+    if ((final - i) < (j - inicio))
+    {
+        quickSortEmpilha(arr, i, final, valores);
+    }
+}
+
+
+/*
+ * Organiza array no estilo quick sort iterativo.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    inicio     inicio do array.
  * @param    final      inicio do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
@@ -228,6 +290,31 @@ void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
             stack[++topo] = i;
             stack[++topo] = final;
         }
+    }
+}
+
+
+/*
+ * Organiza array no estilo insertion sort.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    inicio     inicio do array.
+ * @param    final      inicio do array.
+ */
+void insercaoSort(int *arr, int inicio, int final)
+{
+    for (int i = inicio + UM; i <= final; i++)
+    {
+        int temp = arr[i];
+        int j = i;
+
+        while ((j > inicio) && (temp < arr[j - UM]))
+        {
+            arr[j] = arr[j - UM];
+            j--;
+        }
+
+        arr[j] = temp;
     }
 }
 
