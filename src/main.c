@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
                        "\nQuick Sort Recursivo - %d elementos\n");
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
-//
+
 //        // Quick Sort calculaMediana (k = 3)
 //        quickSortsComK(pArquivo,
 //                       &valores,
@@ -158,8 +158,8 @@ int main(int argc, char *argv[])
 //                       CINCO,
 //                       tamanhos[i],
 //                       "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
         // Quick Sort Inserção (m = 10)
         quickSortsComK(pArquivo,
@@ -183,15 +183,15 @@ int main(int argc, char *argv[])
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
-//        // Quick Sort Empilha Inteligente
-//        quickSortsSemK(pArquivo,
-//                       &valores,
-//                       quickSortEmpilha,
-//                       arrRandomNum,
-//                       tamanhos[i],
-//                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+        // Quick Sort Empilha Inteligente
+        quickSortsSemK(pArquivo,
+                       &valores,
+                       quickSortEmpilha,
+                       arrRandomNum,
+                       tamanhos[i],
+                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
         // Quick Sort Iterativo
         quickSortsSemK(pArquivo,

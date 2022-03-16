@@ -1,7 +1,6 @@
 #include "quickSorts.h"
 #include <stdlib.h>
 #include <stdbool.h>
-#include <math.h>
 
 #define MENOS_UM (-1)
 #define ZERO 0
@@ -17,7 +16,7 @@ void criaParticaoMediana(int *arr, int k, int inicio, int final, int *i, int *j,
 
 void insercaoSort(int *arr, int inicio, int final);
 
-int calculaMediana(int *arr, int k, int final);
+int calculaMediana(int *arr, int k, int inicio, int final);
 
 void troca(int *a, int *b);
 
@@ -40,7 +39,7 @@ void inicializaTupla(Tupla *valores)
  *
  * @param    arr        ponteiro para array.
  * @param    incio      inicio do array.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
  * @param    valores    conjunto de valores para serem calculados.
@@ -79,8 +78,8 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
  * Organiza array no estilo quick sort recursivo.
  *
  * @param    arr        ponteiro para array.
- * @param    incio      inicio do array.
- * @param    final      inicio do array.
+ * @param    inicio     inicio do array.
+ * @param    final      fim do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
 void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
@@ -100,44 +99,27 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
 }
 
 
-// calcula a mediana aleatoria
-int calculaMediana(int *arr, int k, int final)
+/*
+ * Calcula mediana de elementos aleatórios de um array.
+ *
+ * @param    arr        ponteiro para array.
+ * @param    k          constante para algoritmos específicos.
+ * @param    inicio     inicio do array.
+ * @param    final      fim do array.
+ */
+int calculaMediana(int *arr, const int k, int inicio, int final)
 {
-    int *random, mediana, mid;
-    bool flag = true;
+    int randArr[k];
 
-    //acha randons que não se repetem e coloca em um arr
-    while (flag)
+    for (int i = ZERO; i < k; i++)
     {
-        int contador = ZERO;
-
-        for (int i = ZERO; i < k; ++i)
-        {
-            random[i] = rand() % final;
-        }
-        for (int j = ZERO; j < k; ++j)
-        {
-            for (int m = ZERO; m < k - UM; ++m)
-            {
-                if (random[j] == random[m] && j != m)
-                {
-                    contador++;
-                }
-            }
-        }
-        if (contador <= ZERO)
-        {
-            flag = false;
-        }
+        randArr[i] = (rand() % final) + inicio + UM;
     }
 
-    //organiza a lista com insertion
-    insercaoSort(random, ZERO, k);
-    // calcula a mediana
-    mid = (int) floor(k) - UM;
-    mediana = arr[random[mid]];
+    // Organiza array.
+    insercaoSort(randArr, ZERO, k);
 
-    return mediana;
+    return arr[randArr[k / DOIS]];
 }
 
 
@@ -146,18 +128,18 @@ int calculaMediana(int *arr, int k, int final)
  *
  * @param    arr        ponteiro para array.
  * @param    incio      inicio do array.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
  * @param    k          constante para algoritmos específicos.
  * @param    valores    conjunto de valores para serem calculados.
  */
-void criaParticaoMediana(int *arr, int k, int inicio, int final, int *i, int *j, Tupla *valores)
+void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, int *j, Tupla *valores)
 {
     *i = inicio;
     *j = final;
 
-    int pivo = calculaMediana(arr, k, final);
+    int pivo = calculaMediana(arr, k, *i, *j);
 
     do
     {
@@ -173,9 +155,7 @@ void criaParticaoMediana(int *arr, int k, int inicio, int final, int *i, int *j,
         valores->qtdComparacoes++;
         if (*i <= *j)
         {
-            int aux = arr[*i];
-            arr[*i] = arr[*j];
-            arr[*j] = aux;
+            troca(arr + *i, arr + *j);
             (*i)++;
             (*j)--;
             valores->qtdMovimentacoes++;
@@ -190,10 +170,10 @@ void criaParticaoMediana(int *arr, int k, int inicio, int final, int *i, int *j,
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
  * @param    k          constante para quick sort algoritmo.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
-void quickSortMediana(int *arr, int k, int inicio, int final, Tupla *valores)
+void quickSortMediana(int *arr, const int k, int inicio, int final, Tupla *valores)
 {
     int i, j;
 
@@ -215,13 +195,13 @@ void quickSortMediana(int *arr, int k, int inicio, int final, Tupla *valores)
  *
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
- * @param    k          constante para quick sort algoritmo.
- * @param    final      inicio do array.
+ * @param    m          constante para quick sort algoritmo.
+ * @param    final      fim do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
-void quickSortInsercao(int *arr, int k, int inicio, int final, Tupla *valores)
+void quickSortInsercao(int *arr, const int m, int inicio, int final, Tupla *valores)
 {
-    if ((final - inicio) <= k)
+    if ((final - inicio) <= m)
     {
         insercaoSort(arr, inicio, final);
 
@@ -235,11 +215,11 @@ void quickSortInsercao(int *arr, int k, int inicio, int final, Tupla *valores)
 
         if (inicio < j)
         {
-            quickSortInsercao(arr, k, inicio, j, valores);
+            quickSortInsercao(arr, m, inicio, j, valores);
         }
         if (i < final)
         {
-            quickSortInsercao(arr, k, i, final, valores);
+            quickSortInsercao(arr, m, i, final, valores);
         }
     }
 }
@@ -250,7 +230,7 @@ void quickSortInsercao(int *arr, int k, int inicio, int final, Tupla *valores)
  *
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
 void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
@@ -259,11 +239,11 @@ void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
 
     criaParticao(arr, inicio, final, &i, &j, valores);
 
-    if ((j - inicio) < (final - i)) // Left -> Smallest
+    if ((j - inicio) < (final - i) && (inicio < j))
     {
         quickSortEmpilha(arr, inicio, j, valores);
     }
-    if ((final - i) < (j - inicio)) // Right -> Smallest
+    if ((final - i) < (j - inicio) && (i < final))
     {
         quickSortEmpilha(arr, i, final, valores);
     }
@@ -275,7 +255,7 @@ void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
  *
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  * @param    valores    conjunto de valores para serem calculados.
  */
 void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
@@ -314,7 +294,7 @@ void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
  *
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
- * @param    final      inicio do array.
+ * @param    final      fim do array.
  */
 void insercaoSort(int *arr, int inicio, int final)
 {
