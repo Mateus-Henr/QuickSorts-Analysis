@@ -139,25 +139,25 @@ int main(int argc, char *argv[])
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
-//        // Quick Sort Mediana (k = 3)
+//        // Quick Sort calculaMediana (k = 3)
 //        quickSortsComK(pArquivo,
 //                       &valores,
 //                       quickSortMediana,
 //                       arrRandomNum,
 //                       TRES,
 //                       tamanhos[i],
-//                       "\nQuick Sort Mediana (k = 3) - %d elementos\n");
+//                       "\nQuick Sort calculaMediana (k = 3) - %d elementos\n");
 //
 //        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 //
-//        // Quick Sort Mediana (k = 5)
+//        // Quick Sort calculaMediana (k = 5)
 //        quickSortsComK(pArquivo,
 //                       &valores,
 //                       quickSortMediana,
 //                       arrRandomNum,
 //                       CINCO,
 //                       tamanhos[i],
-//                       "\nQuick Sort Mediana (k = 5) - %d elementos\n");
+//                       "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
 //
 //        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
@@ -183,15 +183,15 @@ int main(int argc, char *argv[])
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
-        // Quick Sort Empilha Inteligente
-        quickSortsSemK(pArquivo,
-                       &valores,
-                       quickSortEmpilha,
-                       arrRandomNum,
-                       tamanhos[i],
-                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
-
-        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
+//        // Quick Sort Empilha Inteligente
+//        quickSortsSemK(pArquivo,
+//                       &valores,
+//                       quickSortEmpilha,
+//                       arrRandomNum,
+//                       tamanhos[i],
+//                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
+//
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i]);
 
         // Quick Sort Iterativo
         quickSortsSemK(pArquivo,
