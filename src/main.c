@@ -142,27 +142,27 @@ int main(int argc, char *argv[])
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
-//        // Quick Sort calculaMediana (k = 3)
-//        quickSortsComK(pArquivo,
-//                       &valores,
-//                       quickSortMediana,
-//                       arrRandomNum,
-//                       TRES,
-//                       tamanhos[i],
-//                       "\nQuick Sort calculaMediana (k = 3) - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
-//
-//        // Quick Sort calculaMediana (k = 5)
-//        quickSortsComK(pArquivo,
-//                       &valores,
-//                       quickSortMediana,
-//                       arrRandomNum,
-//                       CINCO,
-//                       tamanhos[i],
-//                       "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+        // Quick Sort calculaMediana (k = 3)
+        quickSortsComK(pArquivo,
+                       &valores,
+                       quickSortMediana,
+                       arrRandomNum,
+                       TRES,
+                       tamanhos[i],
+                       "\nQuick Sort calculaMediana (k = 3) - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
+        // Quick Sort calculaMediana (k = 5)
+        quickSortsComK(pArquivo,
+                       &valores,
+                       quickSortMediana,
+                       arrRandomNum,
+                       CINCO,
+                       tamanhos[i],
+                       "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
+
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
         // Quick Sort Inserção (m = 10)
         quickSortsComK(pArquivo,

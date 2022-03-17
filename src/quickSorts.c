@@ -131,17 +131,15 @@ int calculaMediana(const int *arr, const int k, int inicio, int final)
         }
     }
 
-    int realArr[k];
-
     for (int i = ZERO; i < k; i++)
     {
-        realArr[i] = arr[randArr[i]];
+        randArr[i] = arr[randArr[i]];
     }
 
     // Organiza array.
-    insercaoSort(realArr, ZERO, k);
+    insercaoSort(randArr, ZERO, k);
 
-    return realArr[k / DOIS];
+    return randArr[k / DOIS];
 }
 
 
