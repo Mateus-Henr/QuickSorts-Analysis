@@ -16,7 +16,7 @@ void criaParticaoMediana(int *arr, int k, int inicio, int final, int *i, int *j,
 
 void insercaoSort(int *arr, int inicio, int final);
 
-int calculaMediana(int *arr, int k, int inicio, int final);
+int calculaMediana(const int *arr, int k, int inicio, int final);
 
 void troca(int *a, int *b);
 
@@ -38,7 +38,7 @@ void inicializaTupla(Tupla *valores)
  * Cria partição para quick sort algoritmo de forma recursiva.
  *
  * @param    arr        ponteiro para array.
- * @param    incio      inicio do array.
+ * @param    inicio     inicio do array.
  * @param    final      fim do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
@@ -107,19 +107,41 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
  */
-int calculaMediana(int *arr, const int k, int inicio, int final)
+int calculaMediana(const int *arr, const int k, int inicio, int final)
 {
     int randArr[k];
+    int idxRandArr = ZERO;
+
+    while (idxRandArr < k)
+    {
+        int randNum = (rand() % final) + inicio;
+        bool existe = false;
+
+        for (int i = ZERO; i < k; i++)
+        {
+            if (randArr[i] == randNum)
+            {
+                existe = true;
+            }
+        }
+
+        if (!existe)
+        {
+            randArr[idxRandArr++] = randNum;
+        }
+    }
+
+    int realArr[k];
 
     for (int i = ZERO; i < k; i++)
     {
-        randArr[i] = (rand() % final) + inicio + UM;
+        realArr[i] = arr[randArr[i]];
     }
 
     // Organiza array.
-    insercaoSort(randArr, ZERO, k);
+    insercaoSort(realArr, ZERO, k);
 
-    return arr[randArr[k / DOIS]];
+    return realArr[k / DOIS];
 }
 
 
@@ -139,7 +161,16 @@ void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, i
     *i = inicio;
     *j = final;
 
-    int pivo = calculaMediana(arr, k, *i, *j);
+    int pivo = ZERO;
+
+    if ((*j - *i) > k)
+    {
+        pivo = calculaMediana(arr, k, *i, *j);
+    }
+    else
+    {
+        pivo = arr[(*i + *j) / DOIS];
+    }
 
     do
     {
@@ -239,11 +270,11 @@ void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
 
     criaParticao(arr, inicio, final, &i, &j, valores);
 
-    if ((j - inicio) < (final - i) && (inicio < j))
+    if ((j - inicio) > (final - i))
     {
         quickSortEmpilha(arr, inicio, j, valores);
     }
-    if ((final - i) < (j - inicio) && (i < final))
+    if ((j - inicio) < (final - i))
     {
         quickSortEmpilha(arr, i, final, valores);
     }

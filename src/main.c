@@ -186,15 +186,15 @@ int main(int argc, char *argv[])
 
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
-        // Quick Sort Empilha Inteligente
-        quickSortsSemK(pArquivo,
-                       &valores,
-                       quickSortEmpilha,
-                       arrRandomNum,
-                       tamanhos[i],
-                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
-
-        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+//        // Quick Sort Empilha Inteligente
+//        quickSortsSemK(pArquivo,
+//                       &valores,
+//                       quickSortEmpilha,
+//                       arrRandomNum,
+//                       tamanhos[i],
+//                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
+//
+//        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
         // Quick Sort Iterativo
         quickSortsSemK(pArquivo,
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
 
 
 /*
- * Executa função quick sort (sem constante k) passada como parâmetro e salva detalhes.
+ * Executa função quick sort (sem constante k) e salva detalhes.
  *
  * @param    pArquivo           ponteiro para o arquivo.
  * @param    valores            conjunto de valores para serem escritos no arquivo.
@@ -298,7 +298,7 @@ double calculaTempo(double tempoInicial)
 
 
 /*
- * Gera números aleatórios no array especificado.
+ * Gera números aleatórios no array especificado com seed especifica.
  *
  * @param    arr         ponteiro para array com números aleatórios.
  * @param    tamanho     tamanho do array.
