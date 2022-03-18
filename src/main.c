@@ -26,6 +26,7 @@
 #define MINIMO_ARQ_VALIDO 4
 #define NULL_TERMINATOR 1
 #define INICIO_ARG "quicksort"
+#define ERRO_ORDENACAO "\nERRO: O array não está ordenado.\n"
 #define ARGS_ESPERADO "\nErro: %d argumentos esperados.\n"
 #define ERRO_ARQUIVO_SAIDA "\nErro: Não foi possível gerar o arquivo de saída.\n"
 #define ERRO_FORMATO "\nErro: O formato do argumento deve ser 'quicksort<semente1>saida_semente1.txt'.\n"
@@ -44,6 +45,8 @@ void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *,
 void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string);
 
 void geraNumerosAleatorios(int *arr, int tamanho, unsigned int seed);
+
+void checaOrdenacao(const int *arr, int tamanho);
 
 
 /*
@@ -120,7 +123,7 @@ int main(int argc, char *argv[])
 
 
     // Criando array com os tamanhos para teste.
-    int tamanhos[] = {1000, 5000, 10000, 50000, 100000};
+    int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 250000};
 
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
     {
@@ -140,7 +143,9 @@ int main(int argc, char *argv[])
                        tamanhos[i],
                        "\nQuick Sort Recursivo - %d elementos\n");
 
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
 
         // Quick Sort calculaMediana (k = 3)
         quickSortsComK(pArquivo,
@@ -151,7 +156,9 @@ int main(int argc, char *argv[])
                        tamanhos[i],
                        "\nQuick Sort calculaMediana (k = 3) - %d elementos\n");
 
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
 
         // Quick Sort calculaMediana (k = 5)
         quickSortsComK(pArquivo,
@@ -162,7 +169,9 @@ int main(int argc, char *argv[])
                        tamanhos[i],
                        "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
 
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
 
         // Quick Sort Inserção (m = 10)
         quickSortsComK(pArquivo,
@@ -173,7 +182,9 @@ int main(int argc, char *argv[])
                        tamanhos[i],
                        "\nQuick Sort Inserção (m = 10) - %d elementos\n");
 
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
 
         // Quick Sort Inserção (m = 100)
         quickSortsComK(pArquivo,
@@ -184,17 +195,21 @@ int main(int argc, char *argv[])
                        tamanhos[i],
                        "\nQuick Sort Inserção (m = 100) - %d elementos\n");
 
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
-//        // Quick Sort Empilha Inteligente
-//        quickSortsSemK(pArquivo,
-//                       &valores,
-//                       quickSortEmpilha,
-//                       arrRandomNum,
-//                       tamanhos[i],
-//                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
-//
-//        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
+        // Quick Sort Empilha Inteligente
+        quickSortsSemK(pArquivo,
+                       &valores,
+                       quickSortEmpilha,
+                       arrRandomNum,
+                       tamanhos[i],
+                       "\nQuick Sort Empilha Inteligente - %d elementos\n");
+
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
+        geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
+
 
         // Quick Sort Iterativo
         quickSortsSemK(pArquivo,
@@ -203,9 +218,9 @@ int main(int argc, char *argv[])
                        arrRandomNum,
                        tamanhos[i],
                        "\nQuick Sort Iterativo - %d elementos\n");
-    }
 
-    printf("FIM");
+        checaOrdenacao(arrRandomNum, tamanhos[i]);
+    }
 
     // Fechando arquivo.
     fclose(pArquivo);
@@ -311,5 +326,23 @@ void geraNumerosAleatorios(int *arr, int tamanho, unsigned int seed)
     for (int j = ZERO; j < tamanho; j++)
     {
         arr[j] = rand();
+    }
+}
+
+
+/*
+ * Checa se o array está completamente ordenado.
+ *
+ * @param    arr                ponteiro para array.
+ * @param    tamanho            tamanho do array.
+ */
+void checaOrdenacao(const int *arr, int tamanho)
+{
+    for (int j = ZERO; j < tamanho - UM; j++)
+    {
+        if (arr[j] > arr[j + UM])
+        {
+            printf(ERRO_ORDENACAO);
+        }
     }
 }

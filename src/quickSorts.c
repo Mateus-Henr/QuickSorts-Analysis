@@ -114,7 +114,7 @@ int calculaMediana(const int *arr, const int k, int inicio, int final)
 
     while (idxRandArr < k)
     {
-        int randNum = (rand() % final) + inicio;
+        int randNum = rand() % (final + UM - inicio) + inicio;
         bool existe = false;
 
         for (int i = ZERO; i < k; i++)
@@ -161,7 +161,7 @@ void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, i
 
     int pivo = ZERO;
 
-    if ((*j - *i) > k)
+    if ((*j - *i) + UM > k)
     {
         pivo = calculaMediana(arr, k, *i, *j);
     }
@@ -264,17 +264,22 @@ void quickSortInsercao(int *arr, const int m, int inicio, int final, Tupla *valo
  */
 void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
 {
-    int i, j;
-
-    criaParticao(arr, inicio, final, &i, &j, valores);
-
-    if ((j - inicio) > (final - i))
+    while (inicio < final)
     {
-        quickSortEmpilha(arr, inicio, j, valores);
-    }
-    if ((j - inicio) < (final - i))
-    {
-        quickSortEmpilha(arr, i, final, valores);
+        int i, j;
+
+        criaParticao(arr, inicio, final, &i, &j, valores);
+
+        if ((i - inicio) < (final - i))
+        {
+            quickSortEmpilha(arr, inicio, j, valores);
+            inicio = j + UM;
+        }
+        else
+        {
+            quickSortEmpilha(arr, i, final, valores);
+            final = i - UM;
+        }
     }
 }
 
