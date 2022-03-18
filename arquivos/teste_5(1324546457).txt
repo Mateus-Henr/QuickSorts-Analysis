@@ -1,0 +1,138 @@
+Quick Sort Recursivo - 1000 elementos
+0.000000 2858 2541
+
+Quick Sort Mediana (k = 3) - 1000 elementos
+0.000000 2945 2709
+
+Quick Sort Mediana (k = 5) - 1000 elementos
+0.000000 2958 2710
+
+Quick Sort Inserção (m = 10) - 1000 elementos
+0.000000 1762 1630
+
+Quick Sort Inserção (m = 100) - 1000 elementos
+0.000000 888 873
+
+Quick Sort Empilha Inteligente - 1000 elementos
+0.001000 2960 2638
+
+Quick Sort Iterativo - 1000 elementos
+0.000000 2858 2541
+
+
+
+Quick Sort Recursivo - 5000 elementos
+0.001000 17090 15798
+
+Quick Sort Mediana (k = 3) - 5000 elementos
+0.001000 17608 16405
+
+Quick Sort Mediana (k = 5) - 5000 elementos
+0.002000 17534 16369
+
+Quick Sort Inserção (m = 10) - 5000 elementos
+0.002000 11765 11172
+
+Quick Sort Inserção (m = 100) - 5000 elementos
+0.001000 7488 7405
+
+Quick Sort Empilha Inteligente - 5000 elementos
+0.001000 17699 16392
+
+Quick Sort Iterativo - 5000 elementos
+0.000000 17090 15798
+
+
+
+Quick Sort Recursivo - 10000 elementos
+0.002000 36510 33898
+
+Quick Sort Mediana (k = 3) - 10000 elementos
+0.002000 37372 35137
+
+Quick Sort Mediana (k = 5) - 10000 elementos
+0.003000 37858 35573
+
+Quick Sort Inserção (m = 10) - 10000 elementos
+0.003000 25786 24560
+
+Quick Sort Inserção (m = 100) - 10000 elementos
+0.001000 17186 17024
+
+Quick Sort Empilha Inteligente - 10000 elementos
+0.002000 37722 35101
+
+Quick Sort Iterativo - 10000 elementos
+0.003000 36510 33898
+
+
+
+Quick Sort Recursivo - 50000 elementos
+0.011000 211795 201136
+
+Quick Sort Mediana (k = 3) - 50000 elementos
+0.015000 216756 207110
+
+Quick Sort Mediana (k = 5) - 50000 elementos
+0.017000 219641 210266
+
+Quick Sort Inserção (m = 10) - 50000 elementos
+0.009000 156393 150909
+
+Quick Sort Inserção (m = 100) - 50000 elementos
+0.010000 112449 111657
+
+Quick Sort Empilha Inteligente - 50000 elementos
+0.012000 220024 208989
+
+Quick Sort Iterativo - 50000 elementos
+0.011000 211795 201136
+
+
+
+Quick Sort Recursivo - 100000 elementos
+0.025000 454462 437354
+
+Quick Sort Mediana (k = 3) - 100000 elementos
+0.030000 460526 444606
+
+Quick Sort Mediana (k = 5) - 100000 elementos
+0.034000 469908 454742
+
+Quick Sort Inserção (m = 10) - 100000 elementos
+0.022000 340952 331123
+
+Quick Sort Inserção (m = 100) - 100000 elementos
+0.026000 250272 248685
+
+Quick Sort Empilha Inteligente - 100000 elementos
+0.025000 475584 457635
+
+Quick Sort Iterativo - 100000 elementos
+0.026000 454462 437354
+
+
+
+Quick Sort Recursivo - 250000 elementos
+0.060000 1252059 1224655
+
+Quick Sort Mediana (k = 3) - 250000 elementos
+0.074000 1265556 1237931
+
+Quick Sort Mediana (k = 5) - 250000 elementos
+0.081000 1283409 1257772
+
+Quick Sort Inserção (m = 10) - 250000 elementos
+0.054000 956832 938374
+
+Quick Sort Inserção (m = 100) - 250000 elementos
+0.059000 712544 708727
+
+Quick Sort Empilha Inteligente - 250000 elementos
+0.067000 1326059 1296073
+
+Quick Sort Iterativo - 250000 elementos
+0.064000 1252059 1224655
+
+
+
