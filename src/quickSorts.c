@@ -1,6 +1,7 @@
-#include "quickSorts.h"
 #include <stdlib.h>
 #include <stdbool.h>
+
+#include "quickSorts.h"
 
 #define MENOS_UM (-1)
 #define ZERO 0
@@ -24,7 +25,7 @@ void troca(int *a, int *b);
 /*
  * Inicializa Tupla estrutura.
  *
- * @param    valores     ponteiro para uma Tupla estrutura.
+ * @param    valores     ponteiro para estrutura do tipo Tupla.
  */
 void inicializaTupla(Tupla *valores)
 {
@@ -42,7 +43,7 @@ void inicializaTupla(Tupla *valores)
  * @param    final      fim do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores)
 {
@@ -80,7 +81,7 @@ void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valore
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
 {
@@ -103,7 +104,7 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
  * Calcula mediana de elementos aleatórios de um array.
  *
  * @param    arr        ponteiro para array.
- * @param    k          constante para algoritmos específicos.
+ * @param    k          constante para o algoritmo.
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
  */
@@ -136,7 +137,6 @@ int calculaMediana(const int *arr, const int k, int inicio, int final)
         randArr[i] = arr[randArr[i]];
     }
 
-    // Organiza array.
     insercaoSort(randArr, ZERO, k);
 
     return randArr[k / DOIS];
@@ -147,12 +147,12 @@ int calculaMediana(const int *arr, const int k, int inicio, int final)
  * Cria partição para quick sort algoritmo do tipo mediana.
  *
  * @param    arr        ponteiro para array.
- * @param    incio      inicio do array.
+ * @param    k          constante para o algoritmo.
+ * @param    inicio     inicio do array.
  * @param    final      fim do array.
  * @param    i          ponteiro para cursor.
  * @param    j          ponteiro para cursor.
- * @param    k          constante para algoritmos específicos.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, int *j, Tupla *valores)
 {
@@ -161,7 +161,7 @@ void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, i
 
     int pivo = ZERO;
 
-    if ((*j - *i) + UM > k)
+    if ((*j - *i) > k)
     {
         pivo = calculaMediana(arr, k, *i, *j);
     }
@@ -197,10 +197,10 @@ void criaParticaoMediana(int *arr, const int k, int inicio, int final, int *i, i
  * Organiza array no estilo quick sort mediana.
  *
  * @param    arr        ponteiro para array.
+ * @param    k          constante para o algoritmo.
  * @param    inicio     inicio do array.
- * @param    k          constante para quick sort algoritmo.
  * @param    final      fim do array.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void quickSortMediana(int *arr, const int k, int inicio, int final, Tupla *valores)
 {
@@ -223,10 +223,10 @@ void quickSortMediana(int *arr, const int k, int inicio, int final, Tupla *valor
  * Organiza array no estilo quick sort inserção.
  *
  * @param    arr        ponteiro para array.
+ * @param    m          constante para algoritmo.
  * @param    inicio     inicio do array.
- * @param    m          constante para quick sort algoritmo.
  * @param    final      fim do array.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void quickSortInsercao(int *arr, const int m, int inicio, int final, Tupla *valores)
 {
@@ -260,7 +260,7 @@ void quickSortInsercao(int *arr, const int m, int inicio, int final, Tupla *valo
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
 {
@@ -290,7 +290,7 @@ void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
  * @param    arr        ponteiro para array.
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
- * @param    valores    conjunto de valores para serem calculados.
+ * @param    valores    ponteiro para estrutura do tipo Tupla.
  */
 void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
 {

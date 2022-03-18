@@ -25,6 +25,7 @@
 #define DELIMITADORES "<>"
 #define MINIMO_ARQ_VALIDO 4
 #define NULL_TERMINATOR 1
+#define SEPARADOR "\n\n\n"
 #define INICIO_ARG "quicksort"
 #define ERRO_ORDENACAO "\nERRO: O array não está ordenado.\n"
 #define ARGS_ESPERADO "\nErro: %d argumentos esperados.\n"
@@ -65,22 +66,27 @@ int main(int argc, char *argv[])
         return INVALIDO;
     }
 
+    // Retorna valor antes do delimitadores esperados. Caso contrário retorna nulo.
     char *string = strstr(argv[UM], INICIO_ARG);
 
+    // Checa se encontrou o valor antes dos delimitadores e valor entre os delimitadores.
     if (!string || !strtok(string, DELIMITADORES))
     {
         printf(ERRO_FORMATO);
         return INVALIDO;
     }
 
+    // Retorna valor entre os delimitadores. Caso contrário retorna nulo.
     char *seedString = strtok(NULL, DELIMITADORES);
 
+    // Checa se encontrou valor entre delimitadores.
     if (!seedString)
     {
         printf(ERRO_FORMATO);
         return INVALIDO;
     }
 
+    // Checa se os algarismos entre os delimitadores são digitos.
     for (int i = ZERO; i < strlen(seedString); i++)
     {
         if (!isdigit((int) seedString[i]))
@@ -90,15 +96,20 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Retorna valor depois dos delimitadores. Caso contrário retorna nulo.
     char *nomeArquivo = strtok(NULL, DELIMITADORES);
 
+    // Checa se encontrou valor depois dos delimitadores. E se o mesmo tem o mínimo número de caracteres para ser um arquivo válido.
     if (!nomeArquivo || strlen(nomeArquivo) < MINIMO_ARQ_VALIDO)
     {
         printf(ERRO_FORMATO);
         return INVALIDO;
     }
 
-    /// -------------------------------------------------------- FIM CHECAGEM ARGUMENTOS -------------------------------------------------------------
+    /// ----------------------------------------------------------- FIM CHECAGEM ARGUMENTOS ----------------------------------------------------------
+
+
+    /// ----------------------------------------------------------- PROCESSAMENTO DE DADOS -----------------------------------------------------------
 
     // Declarando variáveis.
     unsigned int seed = ZERO;
@@ -106,7 +117,7 @@ int main(int argc, char *argv[])
 
     // Atribuindo caminho do arquivo.
     strcpy(arquivo, CAMINHO_ARQUIVO);
-    // Atribuindo nome do pArquivo.
+    // Atribuindo nome do arquivo.
     strcat(arquivo, nomeArquivo);
     // Atribuindo seed.
     sscanf(seedString, "%i", &seed);
@@ -125,14 +136,16 @@ int main(int argc, char *argv[])
     // Criando array com os tamanhos para teste.
     int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 250000};
 
+    // Realizando os testes com os valores de n diferentes.
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
     {
+        // Inicializa array com o tamanho desejado.
         int arrRandomNum[tamanhos[i]];
 
         // Gerando números aleatórios.
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
-        // Criando uma variável da estrutura tupla para juntar valores de análise.
+        // Criando uma variável da estrutura Tupla para juntar valores de análise.
         Tupla valores;
 
         // Quick Sort Recursivo
@@ -141,33 +154,33 @@ int main(int argc, char *argv[])
                        quickSortRecursivo,
                        arrRandomNum,
                        tamanhos[i],
-                       "\nQuick Sort Recursivo - %d elementos\n");
+                       "Quick Sort Recursivo - %d elementos\n");
 
         checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
 
-        // Quick Sort calculaMediana (k = 3)
+        // Quick Sort Mediana (k = 3)
         quickSortsComK(pArquivo,
                        &valores,
                        quickSortMediana,
                        arrRandomNum,
                        TRES,
                        tamanhos[i],
-                       "\nQuick Sort calculaMediana (k = 3) - %d elementos\n");
+                       "\nQuick Sort Mediana (k = 3) - %d elementos\n");
 
         checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
 
 
-        // Quick Sort calculaMediana (k = 5)
+        // Quick Sort Mediana (k = 5)
         quickSortsComK(pArquivo,
                        &valores,
                        quickSortMediana,
                        arrRandomNum,
                        CINCO,
                        tamanhos[i],
-                       "\nQuick Sort calculaMediana (k = 5) - %d elementos\n");
+                       "\nQuick Sort Mediana (k = 5) - %d elementos\n");
 
         checaOrdenacao(arrRandomNum, tamanhos[i]);
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
@@ -220,11 +233,17 @@ int main(int argc, char *argv[])
                        "\nQuick Sort Iterativo - %d elementos\n");
 
         checaOrdenacao(arrRandomNum, tamanhos[i]);
+
+        // Adiciona espaçamento no arquivo para diferentes tamanhos de arrays.
+        fprintf(pArquivo, SEPARADOR);
     }
 
     // Fechando arquivo.
     fclose(pArquivo);
     pArquivo = NULL;
+
+    /// --------------------------------------------------------- FIM PROCESSAMENTO DE DADOS ---------------------------------------------------------
+
 
     return ZERO;
 }
@@ -234,11 +253,11 @@ int main(int argc, char *argv[])
  * Executa função quick sort (sem constante k) e salva detalhes.
  *
  * @param    pArquivo           ponteiro para o arquivo.
- * @param    valores            conjunto de valores para serem escritos no arquivo.
+ * @param    valores            ponteiro para a estrutura Tupla.
  * @param    quickSortTipo      ponteiro para função quick sort para ser executada.
  * @param    arr                ponteiro para array com números aleatórios.
  * @param    tamanho            tamanho do array.
- * @param    string             contém informações do algoritmo.
+ * @param    string             contém informações sobre a função quick sort sendo executada.
  */
 void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, Tupla *), int *arr, int tamanho, char *string)
 {
@@ -256,12 +275,12 @@ void quickSortsSemK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *,
  * Executa função quick sort (com constante k) passada como parâmetro e salva detalhes.
  *
  * @param    pArquivo           ponteiro para o arquivo.
- * @param    valores            conjunto de valores para serem escritos no arquivo.
+ * @param    valores            ponteiro para a estrutura Tupla.
  * @param    quickSortTipo      ponteiro para função quick sort para ser executada.
  * @param    arr                ponteiro para array com números aleatórios.
  * @param    k                  constante para quick sort algoritmo.
  * @param    tamanho            tamanho do array.
- * @param    string             contém informações do algoritmo.
+ * @param    string             contém informações sobre a função quick sort sendo executada.
  */
 void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *, int, int, int, Tupla *), int *arr, int k, int tamanho, char *string)
 {
@@ -279,9 +298,9 @@ void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *,
  * Escreve dados em arquivo.
  *
  * @param    pArquivo    ponteiro para o arquivo.
- * @param    valores     conjunto de valores para serem escritos no arquivo.
+ * @param    valores     ponteiro para a estrutura Tupla.
  * @param    tamanho     tamanho do array.
- * @param    string      contém informações do algoritmo.
+ * @param    string      contém informações sobre a função quick sort sendo executada.
  */
 void escreveNoArquivo(FILE *pArquivo, Tupla *valores, int tamanho, char *string)
 {
