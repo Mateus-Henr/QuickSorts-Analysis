@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 
 
     // Criando array com os tamanhos para teste.
-    int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 250000};
+    int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 500000, 1000000, 1500000, 2000000, 2500000, 3000000};
 
     // Realizando os testes com os valores de n diferentes.
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
