@@ -107,6 +107,7 @@ void quickSortRecursivo(int *arr, int inicio, int final, Tupla *valores)
  * @param    k          constante para o algoritmo.
  * @param    inicio     inicio do array.
  * @param    final      fim do array.
+ * @return              a mediana do pedaço do array informado.
  */
 int calculaMediana(const int *arr, const int k, int inicio, int final)
 {
