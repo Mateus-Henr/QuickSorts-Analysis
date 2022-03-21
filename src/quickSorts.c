@@ -8,7 +8,6 @@
 #define UM 1
 #define DOIS 2
 
-
 // Protótipos de funções.
 
 void criaParticao(int *arr, int inicio, int final, int *i, int *j, Tupla *valores);
@@ -295,7 +294,7 @@ void quickSortEmpilha(int *arr, int inicio, int final, Tupla *valores)
  */
 void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
 {
-    int stack[final - inicio + UM];
+    int *stack = malloc((final - inicio + UM) * sizeof(int));
     int topo = MENOS_UM;
 
     stack[++topo] = inicio;
@@ -321,6 +320,8 @@ void quickSortIterativo(int *arr, int inicio, int final, Tupla *valores)
             stack[++topo] = final;
         }
     }
+
+    free(stack);
 }
 
 

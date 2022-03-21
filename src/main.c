@@ -134,13 +134,30 @@ int main(int argc, char *argv[])
 
 
     // Criando array com os tamanhos para teste.
-    int tamanhos[] = {1000, 5000, 10000, 50000, 100000, 500000, 1000000, 1500000, 2000000, 2500000, 3000000};
+    int tamanhos[] = {1000,
+                      5000,
+                      10000,
+                      50000,
+                      100000,
+                      500000,
+                      1000000,
+                      1500000,
+                      2000000,
+                      2500000,
+                      3000000,
+                      4000000,
+                      5000000,
+                      6000000,
+                      7000000,
+                      8000000,
+                      90000000,
+                      10000000};
 
     // Realizando os testes com os valores de n diferentes.
     for (int i = ZERO; i < (sizeof(tamanhos) / sizeof(tamanhos[ZERO])); i++)
     {
         // Inicializa array com o tamanho desejado.
-        int arrRandomNum[tamanhos[i]];
+        int *arrRandomNum = malloc(tamanhos[i] * sizeof(int));
 
         // Gerando números aleatórios.
         geraNumerosAleatorios(arrRandomNum, tamanhos[i], seed);
@@ -236,6 +253,9 @@ int main(int argc, char *argv[])
 
         // Adiciona espaçamento no arquivo para diferentes tamanhos de arrays.
         fprintf(pArquivo, SEPARADOR);
+
+        // Liberando array na memória.
+        free(arrRandomNum);
     }
 
     // Fechando arquivo.
@@ -305,7 +325,7 @@ void quickSortsComK(FILE *pArquivo, Tupla *valores, void (*quickSortTipo)(int *,
 void escreveNoArquivo(FILE *pArquivo, Tupla *valores, int tamanho, char *string)
 {
     fprintf(pArquivo, string, tamanho);
-    fprintf(pArquivo, "%lf %d %d\n", valores->tempo, valores->qtdComparacoes, valores->qtdMovimentacoes);
+    fprintf(pArquivo, "%0.4lf %ld %ld\n", valores->tempo, valores->qtdComparacoes, valores->qtdMovimentacoes);
 }
 
 

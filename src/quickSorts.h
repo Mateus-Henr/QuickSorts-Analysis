@@ -1,8 +1,8 @@
 typedef struct
 {
     double tempo;
-    unsigned int qtdComparacoes;
-    unsigned int qtdMovimentacoes;
+    unsigned long int qtdComparacoes;
+    unsigned long int qtdMovimentacoes;
 } Tupla;
 
 void inicializaTupla(Tupla *valores);
